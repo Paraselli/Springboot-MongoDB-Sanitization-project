@@ -2,9 +2,9 @@
 
 ## 📌 Overview
 
-This project demonstrates how to build a **secure Spring Boot application** with MongoDB by implementing **input sanitization and validation** to prevent common security vulnerabilities.
+This project demonstrates how to build a **secure Spring Boot application** using MongoDB with a focus on **input sanitization and validation**.
 
-It focuses on protecting applications from:
+It helps prevent:
 
 * NoSQL Injection
 * Malicious user inputs
@@ -16,8 +16,8 @@ It focuses on protecting applications from:
 
 Client → Spring Boot API → Sanitization Layer → MongoDB
 
-* Incoming requests are sanitized before processing
-* Ensures only safe and validated data is stored
+* All incoming requests are sanitized before processing
+* Ensures only clean and safe data is stored
 
 ---
 
@@ -33,7 +33,7 @@ Client → Spring Boot API → Sanitization Layer → MongoDB
 
 ## 📂 Project Structure
 
-```id="1jgqgp"
+```id="k1y2zd"
 src/
 ├── controller/
 ├── service/
@@ -47,28 +47,22 @@ src/
 
 ## ⚙️ Setup Instructions
 
-### 🔹 1. Clone Repository
+### 🔹 Clone Repository
 
-```id="0m1so1"
-git clone https://github.com/<your-username>/Springboot-MongoDB-Sanitization-project.git
+```id="rdxwsi"
+git clone https://github.com/Paraselli/Springboot-MongoDB-Sanitization-project.git
 cd Springboot-MongoDB-Sanitization-project
 ```
 
----
+### 🔹 Configure MongoDB
 
-### 🔹 2. Configure MongoDB
-
-Update `application.properties`:
-
-```id="q6cbfm"
+```id="7k3f66"
 spring.data.mongodb.uri=mongodb://localhost:27017/testdb
 ```
 
----
+### 🔹 Run Application
 
-### 🔹 3. Run Application
-
-```id="n2m2qi"
+```id="g28o31"
 mvn spring-boot:run
 ```
 
@@ -85,12 +79,12 @@ mvn spring-boot:run
 ### ✅ Validation
 
 * Field-level validation
-* Rejects invalid/malicious data
+* Rejects invalid or malicious data
 
 ### ✅ NoSQL Injection Prevention
 
-* Avoids dynamic query injection
-* Uses safe query methods
+* Avoids unsafe query construction
+* Uses secure repository methods
 
 ---
 
@@ -103,19 +97,19 @@ mvn spring-boot:run
 
 ---
 
-## ⚡ Example Sanitization
+## ⚡ Example
 
-Input:
+### Input:
 
-```json id="69a0jj"
+```json id="v2p2xr"
 {
   "name": "<script>alert('hack')</script>"
 }
 ```
 
-Sanitized Output:
+### Sanitized Output:
 
-```json id="nq37rs"
+```json id="d90qj3"
 {
   "name": "alert('hack')"
 }
@@ -128,23 +122,30 @@ Sanitized Output:
 * Secure REST APIs
 * MongoDB integration
 * Input sanitization layer
-* Clean architecture (Controller → Service → Repository)
+* Clean layered architecture
 
 ---
 
 ## 📈 Future Improvements
 
-* Add JWT Authentication
-* Add rate limiting
-* Add logging & monitoring
-* Deploy to cloud (Azure/AWS)
-* Add integration tests
+* JWT Authentication
+* Rate limiting
+* Logging & monitoring
+* Docker & Kubernetes deployment
+* Cloud deployment (Azure/AWS)
 
 ---
 
 ## 💥 Author
 
 Ram P
+
+---
+
+## 🔗 Connect with me
+
+🔗 linkedin.com/in/ram-paraselli
+💻 github.com/Paraselli
 
 ---
 
