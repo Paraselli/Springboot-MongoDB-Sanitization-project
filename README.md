@@ -1,152 +1,226 @@
-# 🚀 Spring Boot + MongoDB Sanitization Project
+# 🛡️ Spring Boot MongoDB Sanitization Project
 
-## 📌 Overview
+<div align="center">
 
-This project demonstrates how to build a **secure Spring Boot application** using MongoDB with a focus on **input sanitization and validation**.
+![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge\&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-green?style=for-the-badge\&logo=springboot)
+![MongoDB](https://img.shields.io/badge/MongoDB-NoSQL-47A248?style=for-the-badge\&logo=mongodb)
+![Security](https://img.shields.io/badge/Security-Input_Sanitization-red?style=for-the-badge\&logo=datadog)
+![Maven](https://img.shields.io/badge/Maven-Build-C71A36?style=for-the-badge\&logo=apachemaven)
 
-It helps prevent:
+### 🔐 Secure Spring Boot application demonstrating MongoDB input sanitization & secure data handling
 
-* NoSQL Injection
-* Malicious user inputs
-* Data integrity issues
+</div>
 
 ---
 
-## 🧩 Architecture
+## 📌 Overview
 
-Client → Spring Boot API → Sanitization Layer → MongoDB
+This project is a **secure Spring Boot + MongoDB backend application** designed to demonstrate **input sanitization**, **secure request handling**, and **MongoDB protection techniques** against malicious payloads such as:
 
-* All incoming requests are sanitized before processing
-* Ensures only clean and safe data is stored
+* NoSQL Injection
+* Script Injection
+* Malicious Input Payloads
+* Unsafe User Data Storage
+* MongoDB Query Manipulation
+
+It showcases how to build **secure backend APIs** by sanitizing incoming request payloads before persisting them in MongoDB.
+
+---
+
+## 🏗️ Architecture
+
+```text
+                    +----------------------+
+                    |      Client/API      |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    |   REST Controller    |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    |   Service Layer      |
+                    | Input Sanitization   |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | Mongo Repository     |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    |      MongoDB         |
+                    +----------------------+
+```
+
+---
+
+## ✨ Features
+
+* ✅ Spring Boot REST API
+* ✅ MongoDB integration
+* ✅ Input sanitization before persistence
+* ✅ Protection against NoSQL injection
+* ✅ Secure request validation
+* ✅ Clean layered architecture
+* ✅ Portfolio-ready security project
 
 ---
 
 ## 🛠️ Tech Stack
 
-* Java 17
-* Spring Boot
-* Spring Data MongoDB
-* MongoDB
-* Maven
+| Technology          | Purpose           |
+| ------------------- | ----------------- |
+| Java 17             | Core language     |
+| Spring Boot         | Backend framework |
+| MongoDB             | NoSQL database    |
+| Spring Data MongoDB | Data access layer |
+| Maven               | Build tool        |
 
 ---
 
 ## 📂 Project Structure
 
-```id="k1y2zd"
-src/
-├── controller/
-├── service/
-├── repository/
-├── model/
-├── config/
-└── util/ (sanitization logic)
+```bash
+Springboot-MongoDB-Sanitization-project/
+│── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/example/demo/
+│   │   │       ├── controller/
+│   │   │       ├── model/
+│   │   │       ├── repository/
+│   │   │       ├── service/
+│   │   │       ├── util/
+│   │   │       └── DemoApplication.java
+│   │   │
+│   │   └── resources/
+│   │       └── application.properties
+│
+│── pom.xml
+└── README.md
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚙️ Setup & Run
 
-### 🔹 Clone Repository
+### 1️⃣ Clone Repository
 
-```id="rdxwsi"
+```bash
 git clone https://github.com/Paraselli/Springboot-MongoDB-Sanitization-project.git
 cd Springboot-MongoDB-Sanitization-project
 ```
 
-### 🔹 Configure MongoDB
+### 2️⃣ Configure MongoDB
 
-```id="7k3f66"
-spring.data.mongodb.uri=mongodb://localhost:27017/testdb
+Make sure MongoDB is running locally on:
+
+```bash
+mongodb://localhost:27017
 ```
 
-### 🔹 Run Application
+### 3️⃣ Run Application
 
-```id="g28o31"
+```bash
 mvn spring-boot:run
 ```
 
----
+Application runs on:
 
-## 🔐 Security Features
-
-### ✅ Input Sanitization
-
-* Removes harmful characters
-* Prevents script injection
-* Cleans user inputs before DB operations
-
-### ✅ Validation
-
-* Field-level validation
-* Rejects invalid or malicious data
-
-### ✅ NoSQL Injection Prevention
-
-* Avoids unsafe query construction
-* Uses secure repository methods
+```bash
+http://localhost:8080
+```
 
 ---
 
-## 🔄 API Endpoints (Example)
+## 📬 API Flow
 
-| Method | Endpoint | Description   |
-| ------ | -------- | ------------- |
-| POST   | /users   | Create user   |
-| GET    | /users   | Get all users |
+### Example Request
 
----
+```http
+POST /users
+```
 
-## ⚡ Example
+### Incoming Payload
 
-### Input:
-
-```json id="v2p2xr"
+```json
 {
-  "name": "<script>alert('hack')</script>"
+  "name": "<script>alert('xss')</script>",
+  "email": "test@example.com"
 }
 ```
 
-### Sanitized Output:
+### Sanitized Output Stored in MongoDB
 
-```json id="d90qj3"
+```json
 {
-  "name": "alert('hack')"
+  "name": "alert('xss')",
+  "email": "test@example.com"
 }
 ```
 
 ---
 
-## 🚀 Features
+## 🔐 Security Focus
 
-* Secure REST APIs
-* MongoDB integration
-* Input sanitization layer
+This project demonstrates protection against:
+
+* NoSQL Injection
+* XSS-style payload injection
+* Script-based malicious inputs
+* Unsafe MongoDB persistence
+* Malformed request data
+
+Sanitization ensures that only safe, cleaned input is persisted.
+
+---
+
+## 🔁 Request Flow
+
+1. Client sends request
+2. Controller receives payload
+3. Service sanitizes input
+4. Clean data sent to repository
+5. Repository stores sanitized data in MongoDB
+
+---
+
+## 🎯 Why This Project Matters
+
+This project demonstrates real-world **backend security engineering** concepts:
+
+* Secure API design
+* Input sanitization
+* MongoDB protection
 * Clean layered architecture
+* Security-first backend development
+
+Perfect for:
+
+* Backend security portfolio
+* Resume project
+* Spring Boot security interviews
+* Secure coding demonstrations
 
 ---
 
-## 📈 Future Improvements
-
-* JWT Authentication
-* Rate limiting
-* Logging & monitoring
-* Docker & Kubernetes deployment
-* Cloud deployment (Azure/AWS)
+## 👨‍💻 Author
 
 ---
 
-## 💥 Author
+### Ram Paraselli
 
-Ram P
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-0A66C2?style=for-the-badge\&logo=linkedin)](https://www.linkedin.com/in/ram-paraselli/)
 
----
-
-## 🔗 Connect with me
-
-🔗 linkedin.com/in/ram-paraselli
-💻 github.com/Paraselli
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge\&logo=github)](https://github.com/Paraselli)
 
 ---
 
-## ⭐ If you like this project, give it a star!
+## ⭐ Support
+
+If this project helped you, consider giving it a **star** ⭐ on GitHub.
