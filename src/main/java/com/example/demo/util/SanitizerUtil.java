@@ -5,9 +5,9 @@ public class SanitizerUtil {
     public static String sanitize(String input) {
         if (input == null) return null;
 
-        // Remove MongoDB operators
+        // Remove MongoDB operator prefix '$' and HTML/script tags
         return input.replaceAll("\\$", "")
-                    .replaceAll("\\.", "")
+                    .replaceAll("<[^>]*>", "")
                     .trim();
     }
 }
